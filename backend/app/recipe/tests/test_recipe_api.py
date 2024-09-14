@@ -74,3 +74,21 @@ class PrivateRecipeApiTests(TestCase):
         serializer = RecipeSerializer(recipes, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
+
+    def test_recipes_limited_to_user(self):
+        """
+        Test retrieving recipes for user
+        """
+        user2 = get_user_model().objects.create_user(
+            "other@example.com",
+            "testpass",
+        )
+        create_recipe(user=user2)
+        create_recipe(user=self.user)
+
+        res = self.client.get(RECIPES_URL)
+
+        recipe = Recipe.objects.filter(user=self.user)
+        serializer = RecipeSerializer(recipe, many=True)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data, serializer.data)
