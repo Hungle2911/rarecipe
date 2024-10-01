@@ -37,6 +37,7 @@ class TagViewSet(
     viewsets.GenericViewSet,
     mixins.ListModelMixin,
     mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
 ):
     """Manage tags in the database"""
 
