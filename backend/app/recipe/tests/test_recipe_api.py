@@ -427,9 +427,8 @@ class PrivateRecipeApiTests(TestCase):
         self.assertIn(s2.data, res.data)
         self.assertNotIn(s3.data, res.data)
 
-
-class ImageUploadTests(TestCase):
-    """Test for image upload API"""
+    # class ImageUploadTests(TestCase):
+    """Test image upload for recipes"""
 
     def setUp(self):
         self.client = APIClient()
