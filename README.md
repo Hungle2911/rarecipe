@@ -21,6 +21,7 @@ A robust REST API built with Django REST Framework that allows users to manage r
 - Docker & Docker Compose
 - GitHub Actions for CI/CD
 - Pillow for Image Processing
+- DRF Spectacular for automating Django REST APIs documentation
 
 ## 📋 Prerequisites
 
@@ -35,7 +36,7 @@ A robust REST API built with Django REST Framework that allows users to manage r
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Hungle2911/rarecipe
+git clone https://github.com/Hungle2911/rarecipe-api
 cd rarecipe-api
 ```
 
@@ -54,7 +55,7 @@ docker-compose up --build
 4. Run migrations:
 
 ```bash
-docker-compose exec app python manage.py migrate
+docker-compose run --rm app sh -c "python manage.py migrate"
 ```
 
 ### Local Development
@@ -100,39 +101,11 @@ python manage.py test
 
 ## 📚 API Documentation
 
-### Authentication Endpoints
+### API Documentation Endpoints
 
-- POST `/api/user/create/` - Create a new user
-- POST `/api/user/token/` - Obtain authentication token
-- PUT `/api/user/me/` - Update user profile
+- `/api/docs/` - See what endpoints available
 
-### Recipe Endpoints
-
-- GET `/api/recipe/recipes/` - List all recipes
-- POST `/api/recipe/recipes/` - Create a new recipe
-- GET `/api/recipe/recipes/{id}/` - Retrieve a specific recipe
-- PUT `/api/recipe/recipes/{id}/` - Update a recipe
-- DELETE `/api/recipe/recipes/{id}/` - Delete a recipe
-- POST `/api/recipe/recipes/{id}/upload-image/` - Upload recipe image
-
-### Tags and Ingredients
-
-- GET `/api/recipe/tags/` - List all tags
-- GET `/api/recipe/ingredients/` - List all ingredients
-
-## 🔐 Environment Variables
-
-Create a `.env` file with the following variables:
-
-```env
-DEBUG=1
-SECRET_KEY=your-secret-key
-ALLOWED_HOSTS=localhost,127.0.0.1
-DB_HOST=db
-DB_NAME=devdb
-DB_USER=devuser
-DB_PASS=changeme
-```
+![API Endpoints](./docs/API-endpoints.png)
 
 ## 🐳 Docker Commands
 
@@ -144,9 +117,6 @@ docker-compose up --build
 
 # Run migrations
 docker-compose exec app python manage.py migrate
-
-# Create superuser
-docker-compose exec app python manage.py createsuperuser
 
 # Run tests
 docker-compose run --rm app sh -c "python manage.py test"
